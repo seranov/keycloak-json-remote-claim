@@ -13,8 +13,10 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <keycloak.version>8.0.1</keycloak.version>
+        <keycloak.version>12.0.3</keycloak.version>
         <java.version>1.8</java.version>
+        <resteasy.version>4.6.0.Final</resteasy.version>
+        <jupiter.version>5.7.1</jupiter.version>
     </properties>
 
     <build>
@@ -38,9 +40,17 @@
                     <configuration>
                         <archive>
                             <manifestEntries>
-                                <Dependencies>org.keycloak.keycloak-core,org.keycloak.keycloak-server-spi,org.keycloak.keycloak-server-spi-private,org.keycloak.keycloak-services</Dependencies>
+                                <Dependencies>org.keycloak.keycloak-core,org.keycloak.keycloak-server-spi,org.keycloak.keycloak-server-spi-private,org.keycloak.keycloak-services,org.jboss.resteasy.resteasy-jaxrs,org.jboss.resteasy.resteasy-jackson2-provider</Dependencies>
                             </manifestEntries>
                         </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>3.0.0-M5</version>
+                    <configuration>
+                        <skipTests>true</skipTests>
                     </configuration>
                 </plugin>
             </plugins>
@@ -72,6 +82,23 @@
             <scope>provided</scope>
             <version>${keycloak.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-core</artifactId>
+            <scope>provided</scope>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jackson2-provider</artifactId>
+            <scope>provided</scope>
+            <version>${resteasy.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${jupiter.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
-
 </project>
